@@ -10,7 +10,7 @@ import { stringify } from 'querystring';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Feed() {
   const { query, push } = useRouter();
   const [keyword, setKeyword] = useState(query.keyword || '');
   const [date, setDate] = useState(query.date || '');

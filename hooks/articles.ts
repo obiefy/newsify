@@ -1,9 +1,10 @@
 import useSWR from 'swr'
 import { stringify } from 'querystring';
+import Article from '@/interfaces/article';
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export const useArticles = (filters: {}) => {
-    const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/?${stringify(filters)}`, fetcher);
+    const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/news?${stringify(filters)}`, fetcher);
     
     return {
       articles: data?.data,
@@ -11,6 +12,7 @@ export const useArticles = (filters: {}) => {
       isLoading,
     }
 }
+
 
 export const useFilters = () => {
   const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/filters`, fetcher);

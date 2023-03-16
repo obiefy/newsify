@@ -6,6 +6,7 @@ type Article = {
     category: String,
     description: String,
     cover: String,
+    url: String,
 }
 
 export default Article;

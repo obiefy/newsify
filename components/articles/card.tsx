@@ -26,6 +26,7 @@ export default function ArticleCard({ article }: Props) {
             </Link>
           </div>
           <h4 className="mt-1 text-gray-800 font-semibold text-md">{article.title}</h4>
+          <p className="mt-1 text-gray-500 text-sm">{article.description}</p>
           <div className="mt-1 flex justify-between">
             <span className="text-gray-400 text-sm">{article.author}</span>
             <span className="text-gray-400 text-sm">{article.publishedAt}</span>
