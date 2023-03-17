@@ -2,9 +2,12 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Logo from "@/components/Logo";
 import { useAuth } from "@/hooks/auth";
+import { useRouter } from "next/router";
 
-export default function Header({ headers }) {
+export default function Header() {
+  const { pathname } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout} = useAuth({ middleware: 'guest', redirectIfAuthenticated: false });
 
   return (
     <nav className="relative bg-white">
@@ -34,8 +37,18 @@ export default function Header({ headers }) {
 
           <div className={`absolute inset-x-0 z-20 w-full px-6 py-4 bg-white lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'}`}>
             <div className="flex flex-col -mx-6 lg:flex-row lg:items-center">
-              <Link href='/' className="px-4 py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-lg lg:mt-0 bg-gray-100">News</Link>
-              {headers}
+              <Link href='/' className={`px-4 py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-lg lg:mt-0 hover:bg-gray-100 ${pathname === '/' ? 'bg-gray-100' : ''}`}>News</Link>
+              {
+                !user &&
+                <Link href="/register" className={`px-4 py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-lg lg:mt-0 hover:bg-gray-100 ${pathname === '/register' || pathname === '/login' ? 'bg-gray-100' : ''}`}>Sign Up</Link>
+              }
+              {
+                user &&
+                <>
+                  <Link href="/feed" className={`px-4 py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-lg lg:mt-0 hover:bg-gray-100 ${pathname === '/feed' ? 'bg-gray-100' : ''}`}>Feed</Link>
+                  <button onClick={logout} className="px-4 py-1.5 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-lg lg:mt-0 hover:bg-gray-100">Logout ({user?.name})</button>
+                </>
+              }
             </div>
           </div>
         </div>

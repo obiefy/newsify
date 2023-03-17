@@ -1,11 +1,6 @@
-import Article from "@/interfaces/article";
 import Link from "next/link";
 
-type Props = {
-  article: Article,
-}
-
-export default function ArticleCard({ article }: Props) {
+export default function ArticleCard({ article }) {
   return (
     <div className="my-2">
       <div className=" pb-5/6">
