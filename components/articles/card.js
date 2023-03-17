@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Follow from "@/components/follow";
 
 export default function ArticleCard({ article }) {
   return (
@@ -11,17 +12,23 @@ export default function ArticleCard({ article }) {
           <div className="flex items-baseline justify-between mb-2">
             <div>
             {article.category &&
-              <Link href={`/?category=${article.category}`} className="inline-block px-2 py-1 leading-none bg-gray-100 border border-gray-300 text-gray-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-              {article.category}
-              </Link>
+              <div className="flex">
+                <Link href={`/?category=${article.category}`} className="inline-block px-2 py-1 leading-none bg-gray-100 border border-gray-300 text-gray-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                {article.category}
+                </Link>
+                <Follow item='category' value={article.category}/>
+              </div>
             }
             </div>
-            <Link href={`/?source=${article.source}`} className="ml-2 text-xs text-gray-600 font-semibold uppercase tracking-wide text-xs">
-              {article.source}
-            </Link>
+            <div className="flex">
+              <Link href={`/?source=${article.source}`} className="ml-2 text-xs text-gray-600 font-semibold uppercase tracking-wide text-xs">
+                {article.source}
+              </Link>
+              <Follow item='source' value={article.source}/>
+            </div>
           </div>
           <h4 className="mt-1 text-gray-800 font-semibold text-md">{article.title}</h4>
-          <p className="mt-1 text-gray-500 text-sm">{article.description}</p>
+          <div className="mt-1 text-gray-700 text-sm">{article.description}</div>
           <div className="mt-1 flex justify-between">
             <span className="text-gray-400 text-sm">{article.author}</span>
             <span className="text-gray-400 text-sm">{article.publishedAt}</span>
