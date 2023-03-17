@@ -7,8 +7,8 @@ const Follow = ({ item, value }) => {
   const { user } = useAuth({ middleware: 'guest', redirectIfAuthenticated: false });
   const [isLoading, setIsLoading] = useState(false);
 
-  const [categories, setCategories] = useState(user.categories || []);
-  const [sources, setSources] = useState(user.sources || []);
+  const [categories, setCategories] = useState(user?.categories || []);
+  const [sources, setSources] = useState(user?.sources || []);
   let type = 'follow';
 
   if(item === 'category') {
