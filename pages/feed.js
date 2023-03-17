@@ -3,13 +3,15 @@ import Layout from '@/components/layout'
 import ArticlesList from '@/components/articles/list';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useArticles, useFeed, useFilters } from '@/hooks/articles';
+import { useFeed } from '@/hooks/articles';
+import { useAuth } from '@/hooks/auth';
 import Loading from '@/components/articles/loading';
 import { stringify } from 'querystring';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Feed() {
+  const { user } = useAuth({ middleware: 'auth', redirectIfAuthenticated: '/login' });
   const { articles = [], error, isLoading } = useFeed();
 
   return (
